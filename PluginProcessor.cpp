@@ -180,30 +180,30 @@ void NewProjectAudioProcessor::fillBuffer(int channel, int bufferSize, int delay
 
     if (delayBufferSize > bufferSize * writePosition) {
 
-        delayBuffer.copyFrom(channel, writePosition, channelData, bufferSize, 0.1f, 0.1f);
+        delayBuffer.copyFromWithRamp(channel, writePosition, channelData, bufferSize, 0.1f, 0.1f);
 
     }
     else
     {
         auto numSamplesToEnd = delayBufferSize - writePosition;
 
-        delayBuffer.copyFrom(channel, writePosition, channelData, numSamplesToEnd, 0.1f, 0.1f);
+        delayBuffer.copyFromWithRamp(channel, writePosition, channelData, numSamplesToEnd, 0.1f, 0.1f);
 
         auto numSamplesAtStart = bufferSize - numSamplesToEnd;
 
-        delayBuffer.copyFrom(channel, 0, channelData + numSamplesToEnd, numSamplesAtStart, 0.1f, 0.1f);
+        delayBuffer.copyFromWithRamp(channel, 0, channelData + numSamplesToEnd, numSamplesAtStart, 0.1f, 0.1f);
 
     }
 
 }
 
-void NewProjectAudioProcessor::readFromBuffer(juce::AudioBuffer<float>& buffer, juce::AudioBuffer<float>& delayBuffer, int channel, int BufferSize, int delayBufferSize)
+void NewProjectAudioProcessor::readFromBuffer(juce::AudioBuffer<float>& buffer, juce::AudioBuffer<float>& delayBuffer, int channel, int bufferSize, int delayBufferSize)
 {
 
     auto readPosition = writePosition - getSampleRate();
 
     if (readPosition < 0)
-        readPosotion += delayBufferSize;
+        readPosition += delayBufferSize;
 
     auto g = 0.7f;
 

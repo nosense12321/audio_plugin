@@ -14,13 +14,13 @@
 //==============================================================================
 /**
 */
-class PluginAudioProcessorEditor : public juce::AudioProcessorEditor,
+class NewProjectAudioProcessorEditor : public juce::AudioProcessorEditor,
     public juce::Slider::Listener
 {
 public:
     void sliderValueChanged(juce::Slider* slider) override;
-    PluginAudioProcessorEditor(NewProjectAudioProcessor&);//PluginAudioProcessor
-    ~PluginAudioProcessorEditor() override;
+    NewProjectAudioProcessorEditor(NewProjectAudioProcessor&);//PluginAudioProcessor
+    ~NewProjectAudioProcessorEditor() override;
 
     //==============================================================================
     void paint(juce::Graphics&) override;
@@ -34,5 +34,5 @@ private:
     juce::Slider gainSlider;
     juce::Slider gainSlider2;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(NewProjectAudioProcessorEditor)
 };

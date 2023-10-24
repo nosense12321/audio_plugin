@@ -12,7 +12,7 @@
 //==============================================================================
 //PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor &p)
     //: AudioProcessorEditor(&p), audioProcessor(p)
-PluginAudioProcessorEditor::PluginAudioProcessorEditor(NewProjectAudioProcessor &p)
+NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioProcessor &p)
     : AudioProcessorEditor(&p), audioProcessor(p)
 {
     // Make sure that before the constructor has finished, you've set the
@@ -33,19 +33,19 @@ PluginAudioProcessorEditor::PluginAudioProcessorEditor(NewProjectAudioProcessor 
     gainSlider2.addListener(this);
 }
 
-PluginAudioProcessorEditor::~PluginAudioProcessorEditor()
+NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
 {
 }
 
 //==============================================================================
-void PluginAudioProcessorEditor::paint(juce::Graphics& g)
+void NewProjectAudioProcessorEditor::paint(juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(juce::Colours::aquamarine);
 
 }
 
-void PluginAudioProcessorEditor::resized()
+void NewProjectAudioProcessorEditor::resized()
 {
     gainSlider.setBounds(getLocalBounds().removeFromLeft(getWidth()/2));
     gainSlider2.setBounds(getLocalBounds().removeFromRight(getWidth() / 2));
@@ -53,8 +53,8 @@ void PluginAudioProcessorEditor::resized()
     // subcomponents in your editor..
 }
 
-void PluginAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
-    //if (slider == &gainSlider) {
-     //   audioProcessor.gainChange = gainSlider.getValue();
-    //}
+void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
+    if (slider == &gainSlider) {
+        audioProcessor.gainChange = gainSlider.getValue();
+    }
 }
