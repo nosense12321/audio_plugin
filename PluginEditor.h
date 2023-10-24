@@ -19,7 +19,7 @@ class NewProjectAudioProcessorEditor : public juce::AudioProcessorEditor,
 {
 public:
     void sliderValueChanged(juce::Slider* slider) override;
-    NewProjectAudioProcessorEditor(NewProjectAudioProcessor&);//PluginAudioProcessor
+    NewProjectAudioProcessorEditor(NewProjectAudioProcessor&);
     ~NewProjectAudioProcessorEditor() override;
 
     //==============================================================================
@@ -29,7 +29,7 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    NewProjectAudioProcessor& audioProcessor;//PluginAudioProcessor
+    NewProjectAudioProcessor& audioProcessor;
 
     juce::Slider gainSlider;
     juce::Slider gainSlider2;

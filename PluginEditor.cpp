@@ -10,8 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-//PluginAudioProcessorEditor::PluginAudioProcessorEditor(PluginAudioProcessor &p)
-    //: AudioProcessorEditor(&p), audioProcessor(p)
+
 NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioProcessor &p)
     : AudioProcessorEditor(&p), audioProcessor(p)
 {
@@ -56,5 +55,8 @@ void NewProjectAudioProcessorEditor::resized()
 void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
     if (slider == &gainSlider) {
         audioProcessor.gainChange = gainSlider.getValue();
+    }
+    if (slider == &gainSlider2) {
+        audioProcessor.gainChange2 = gainSlider2.getValue();
     }
 }
