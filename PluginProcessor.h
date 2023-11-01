@@ -55,10 +55,11 @@ public:
     //==============================================================================
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
-    
+
     double gainChange;
     double gainChange2;
-    
+    double gainChange3;
+
 
 private:
     void fillBuffer(int channel, int bufferSize, int delayBufferSize, float* channelData);

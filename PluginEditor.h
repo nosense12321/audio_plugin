@@ -31,8 +31,13 @@ private:
     // access the processor object that created it.
     NewProjectAudioProcessor& audioProcessor;
 
-    juce::Slider gainSlider;
+    juce::Slider gainSlider1;
+    juce::Label label1;
     juce::Slider gainSlider2;
+    juce::Label label2;
+    juce::Slider gainSlider3;
+    juce::Label label3;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(NewProjectAudioProcessorEditor)
 };
+
