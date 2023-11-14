@@ -45,6 +45,8 @@ private:
 #else
             setResizable(true, false);
             setResizeLimits(300, 250, 10000, 10000);
+
+            setSize(850, 450);
             centreWithSize(getWidth(), getHeight());
 #endif
 
