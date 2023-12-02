@@ -16,7 +16,7 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioPr
 
     addAndMakeVisible(sliderFeedback);
     sliderFeedback.setRange(0.0f, 1.0f);
-    sliderFeedback.setValue(0.7f);
+    sliderFeedback.setValue(0.0f);
     sliderFeedback.setTextBoxStyle(juce::Slider::TextBoxBelow, 0, 100, 20);
     sliderFeedback.setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
     sliderFeedback.addListener(this);
@@ -27,6 +27,9 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioPr
     sliderVolume.setTextBoxStyle(juce::Slider::TextBoxBelow, 0, 100, 20);
     sliderVolume.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     sliderVolume.addListener(this);
+
+    addAndMakeVisible(button);
+    button.onClick = [this]() { off(); };
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -41,9 +44,10 @@ void NewProjectAudioProcessorEditor::paint(juce::Graphics& g)
 
 void NewProjectAudioProcessorEditor::resized()
 {
-    sliderDelayMs.setBounds(getLocalBounds().removeFromTop(getWidth() / 4));
-    sliderFeedback.setBounds(getLocalBounds().removeFromBottom(getWidth() / 4));
-    sliderVolume.setBounds(getLocalBounds().removeFromRight(getWidth() / 4));
+    sliderDelayMs.setBounds(getLocalBounds().removeFromBottom(getWidth() / 3) / 1.4);
+    sliderFeedback.setBounds(getLocalBounds().removeFromTop(getWidth() / 3) / 1.4);
+    sliderVolume.setBounds(getLocalBounds().removeFromRight(getWidth() / 3) / 1.4);
+    button.setBounds(getLocalBounds().removeFromBottom(getWidth() / 5));
 }
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
@@ -56,4 +60,13 @@ void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
     if (slider == &sliderVolume) {
         audioProcessor.changeVolume = sliderVolume.getValue();
     }
+}
+
+void NewProjectAudioProcessorEditor::off() {
+    audioProcessor.changeDelayMs = 0.0f;
+    sliderDelayMs.setValue(0.0f);
+    audioProcessor.changeFeedback = 0.0f;
+    sliderFeedback.setValue(0.0f);
+    audioProcessor.changeVolume = 1.0;
+    sliderVolume.setValue(1.0);
 }

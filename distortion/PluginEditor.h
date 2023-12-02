@@ -15,11 +15,14 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
+    void DistortionAudioProcessorEditor::off();
+
 private:
     DistortionAudioProcessor& audioProcessor;
 
     juce::Slider sliderDistortion;
     juce::Slider sliderVolume;
+    juce::TextButton button {"OFF"};
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessorEditor)
 };
