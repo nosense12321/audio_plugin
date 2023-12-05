@@ -16,6 +16,7 @@ public:
     void resized() override;
 
     void DistortionAudioProcessorEditor::off();
+    void DistortionAudioProcessorEditor::styleMenuChanged();
 
 private:
     DistortionAudioProcessor& audioProcessor;
@@ -23,6 +24,7 @@ private:
     juce::Slider sliderDistortion;
     juce::Slider sliderVolume;
     juce::TextButton button {"OFF"};
+    juce::ComboBox styleMenu;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessorEditor)
 };

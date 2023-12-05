@@ -22,6 +22,11 @@ DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioP
 
     addAndMakeVisible(button);
     button.onClick = [this]() { off(); };
+
+    addAndMakeVisible(styleMenu);
+    styleMenu.addItem("Max", 1);
+    styleMenu.addItem("Min", 2);
+    styleMenu.onChange = [this] { styleMenuChanged(); };
 }
 
 DistortionAudioProcessorEditor::~DistortionAudioProcessorEditor()
@@ -35,9 +40,11 @@ void DistortionAudioProcessorEditor::paint (juce::Graphics& g)
 
 void DistortionAudioProcessorEditor::resized()
 {
+    
     sliderDistortion.setBounds(getLocalBounds().removeFromLeft(getWidth() / 2) / 1.5);
     sliderVolume.setBounds(getLocalBounds().removeFromRight(getWidth() / 2) / 1.5);
     button.setBounds(getLocalBounds().removeFromBottom(getWidth() / 5));
+    styleMenu.setBounds(getLocalBounds().removeFromTop(getWidth() / 10).removeFromRight(getWidth()/3));
 }
 
 void DistortionAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) 
@@ -55,4 +62,20 @@ void DistortionAudioProcessorEditor::off() {
     sliderDistortion.setValue(1.0f);
     audioProcessor.changeVolume = 1.0;
     sliderVolume.setValue(1.0);
+}
+
+void DistortionAudioProcessorEditor::styleMenuChanged() 
+{
+    switch (styleMenu.getSelectedId()) 
+    {
+    case 1: audioProcessor.changeDistortion = 1.0f;
+            audioProcessor.changeVolume = 2.0;
+            break;
+    case 2: audioProcessor.changeDistortion = 0.07f;
+            audioProcessor.changeVolume = 0.0;
+            break;
+    default: break;
+    }
+    sliderDistortion.setValue(audioProcessor.changeDistortion);
+    sliderVolume.setValue(audioProcessor.changeVolume);
 }

@@ -130,7 +130,7 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
             {
                 channelData[sample] = (-1) * changeDistortion;
             }
-            channelData[sample] = buffer.getSample(channel, sample)/ changeDistortion * changeVolume;
+            channelData[sample] = buffer.getSample(channel, sample) * changeVolume;
         }
     }
 }

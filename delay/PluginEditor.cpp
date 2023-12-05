@@ -30,6 +30,11 @@ NewProjectAudioProcessorEditor::NewProjectAudioProcessorEditor(NewProjectAudioPr
 
     addAndMakeVisible(button);
     button.onClick = [this]() { off(); };
+
+    addAndMakeVisible(styleMenu);
+    styleMenu.addItem("Max", 1);
+    styleMenu.addItem("Min", 2);
+    styleMenu.onChange = [this] { styleMenuChanged(); };
 }
 
 NewProjectAudioProcessorEditor::~NewProjectAudioProcessorEditor()
@@ -48,6 +53,7 @@ void NewProjectAudioProcessorEditor::resized()
     sliderFeedback.setBounds(getLocalBounds().removeFromTop(getWidth() / 3) / 1.4);
     sliderVolume.setBounds(getLocalBounds().removeFromRight(getWidth() / 3) / 1.4);
     button.setBounds(getLocalBounds().removeFromBottom(getWidth() / 5));
+    styleMenu.setBounds(getLocalBounds().removeFromTop(getWidth() / 10).removeFromRight(getWidth() / 3));
 }
 
 void NewProjectAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
@@ -69,4 +75,23 @@ void NewProjectAudioProcessorEditor::off() {
     sliderFeedback.setValue(0.0f);
     audioProcessor.changeVolume = 1.0;
     sliderVolume.setValue(1.0);
+}
+
+void NewProjectAudioProcessorEditor::styleMenuChanged()
+{
+    switch (styleMenu.getSelectedId())
+    {
+    case 1: audioProcessor.changeDelayMs = 1.0f;
+            audioProcessor.changeFeedback = 1.0f;
+            audioProcessor.changeVolume = 2.0;
+            break;
+    case 2: audioProcessor.changeDelayMs = 0.0f;
+            audioProcessor.changeFeedback = 0.0f;
+            audioProcessor.changeVolume = 0.0;
+            break;
+    default: break;
+    }
+    sliderDelayMs.setValue(audioProcessor.changeDelayMs);
+    sliderFeedback.setValue(audioProcessor.changeFeedback);
+    sliderVolume.setValue(audioProcessor.changeVolume);
 }

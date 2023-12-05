@@ -17,6 +17,7 @@ public:
     void resized() override;
 
     void NewProjectAudioProcessorEditor::off();
+    void NewProjectAudioProcessorEditor::styleMenuChanged();
 
 private:
     NewProjectAudioProcessor& audioProcessor;
@@ -25,6 +26,7 @@ private:
     juce::Slider sliderFeedback;
     juce::Slider sliderVolume;
     juce::TextButton button{ "OFF" };
+    juce::ComboBox styleMenu;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(NewProjectAudioProcessorEditor)
 };
